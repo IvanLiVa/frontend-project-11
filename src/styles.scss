@@ -1,11 +1,11 @@
 @import '~bootstrap/scss/bootstrap';
 
-
-body {
-  background-color: #f8f9fa;
+.example-link {
+  color: #6c757d; 
 }
 
-.custom-btn {
-  background-color: #3498db;
-  color: white;
+
+.example-link:hover {
+  color: #495057; 
+  text-decoration: underline; 
 }
