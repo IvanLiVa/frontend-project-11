@@ -20,7 +20,7 @@ export default function app() {
         .notOneOf(state.feedList, 'Этот URL уже существует в списке фидов'),
     });
   }
-  const watchState = onChange(state, (path) => {
+  const watchState = onChange(state, () => {
     render(state);
   });
 
