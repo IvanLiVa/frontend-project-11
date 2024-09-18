@@ -26,7 +26,7 @@ i18next.init({
         success: 'RSS successfully loaded',
         exampleLink: 'Example: https://lorem-rss.hexlet.app/feed',
         lead: 'Start reading RSS today! It’s easy and beautiful.',
-        changeLang: 'Русский', 
+        changeLang: 'Русский',
       },
     },
   },

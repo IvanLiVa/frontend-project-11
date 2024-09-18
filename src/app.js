@@ -55,5 +55,4 @@ export default function app() {
       render(state); // рисуем   состояние с новым языком
     });
   });
-
 }

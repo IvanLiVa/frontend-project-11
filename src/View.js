@@ -35,10 +35,8 @@ export default function render(state) {
 
   // определяем тэги для перевода
   document.querySelector('h1').textContent = i18n.t('mainTitle');
-  document.querySelector('label[for="url-input"]').textContent =
-    i18n.t('inputPlaceholder');
-  document.querySelector('button[aria-label="add"]').textContent =
-    i18n.t('button');
+  document.querySelector('label[for="url-input"]').textContent = i18n.t('inputPlaceholder');
+  document.querySelector('button[aria-label="add"]').textContent = i18n.t('button');
   document.querySelector('.example-link').textContent = i18n.t('exampleLink');
   document.querySelector('.lead').textContent = i18n.t('lead');
   document.querySelector('#change-lang').textContent = i18n.t('changeLang');
