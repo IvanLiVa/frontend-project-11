@@ -1,10 +1,12 @@
 import * as yup from 'yup';
 import onChange from 'on-change';
 import render from './View.js';
+import i18n from './i18n.js';
 
 export default function app() {
   const state = {
     submitForm: {
+      success: '',
       error: '',
     },
     feedList: [],
@@ -15,9 +17,9 @@ export default function app() {
       inputValue: yup
         .string()
         .trim()
-        .url('Ссылка должна быть валидным URL')
-        .required('Поле не может быть пустым')
-        .notOneOf(state.feedList, 'Этот URL уже существует в списке фидов'),
+        .url(i18n.t('errorURL'))
+        .required()
+        .notOneOf(state.feedList, i18n.t('duplicateURL')),
     });
   }
   const watchState = onChange(state, () => {
@@ -31,7 +33,8 @@ export default function app() {
       .validate({ inputValue }, { abortEarly: false })
       .then(() => {
         watchState.feedList.push(inputValue);
-        watchState.submitForm.error = 'Rss успешно  загружен'; // убираем  ошибку  при успешной  валидации
+        watchState.submitForm.error = '';
+        watchState.submitForm.success = i18n.t('success');
       })
       .catch((error) => {
         watchState.submitForm.error = error.message; // назначаем ошибку  стейту
@@ -45,4 +48,12 @@ export default function app() {
     handleFunction(inputValue);
     document.querySelector('#url-input').value = ''; // Очистка поля ввода
   });
+
+  document.getElementById('change-lang').addEventListener('click', () => {
+    const newLang = i18n.language === 'ru' ? 'en' : 'ru';
+    i18n.changeLanguage(newLang).then(() => {
+      render(state); // рисуем   состояние с новым языком
+    });
+  });
+
 }
