@@ -2,6 +2,7 @@ import i18n from 'i18next';
 
 export default function render(state) {
   // Отрисовка фидов
+
   const feedList = document.querySelector('.feeds');
   feedList.innerHTML = ''; // Очистим перед отрисовкой
 
@@ -55,13 +56,11 @@ export default function render(state) {
 
   if (state.submitForm.error) {
     feedbackElement.textContent = state.submitForm.error;
-    console.log(state.submitForm.error);
     feedbackElement.classList.remove('text-success');
     feedbackElement.classList.add('text-danger');
     inputField.classList.add('is-invalid');
   } else if (state.submitForm.success) {
     feedbackElement.textContent = state.submitForm.success;
-    console.log(state.submitForm.success);
     feedbackElement.classList.remove('text-danger');
     feedbackElement.classList.add('text-success');
     inputField.classList.remove('is-invalid');
