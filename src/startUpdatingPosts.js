@@ -6,7 +6,7 @@ import { addPost } from './rssService.js';
 const checkForUpdates = (watchedState) => {
   watchedState.feed.forEach((feed) => {
     const feedLink = feed.urlRss;
-    console.log('Полученная ссылка:', feedLink);
+    // console.log('Полученная ссылка:', feedLink);
 
     const proxyUrl = `https://allorigins.hexlet.app/get?url=${encodeURIComponent(feedLink)}`;
 
@@ -17,10 +17,10 @@ const checkForUpdates = (watchedState) => {
         const parsedData = parseRSS(xmlString);
         const newPosts = parsedData.items; // получили пост
 
-        console.log(
-          'Количество постов до обновления:',
-          watchedState.posts.length,
-        );
+        // console.log(
+        //   'Количество постов до обновления:',
+        //   watchedState.posts.length,
+        // );
 
         // Сверяем каждый новый пост с существующими по ссылочке
         newPosts.forEach((newPost) => {
@@ -30,15 +30,15 @@ const checkForUpdates = (watchedState) => {
 
           //  так  если  Не - Уже существует  добавляем в стейт
           if (!isAlreadyExists) {
-            console.log('Найден новый пост:', newPost.title);
+            // console.log('Найден новый пост:', newPost.title);
             addPost(watchedState, feed.id, newPost.title, newPost.link);
           }
         });
 
-        console.log(
-          'Количество постов после обновления:',
-          watchedState.posts.length,
-        );
+        // console.log(
+        //   'Количество постов после обновления:',
+        //   watchedState.posts.length,
+        // );
       })
       .catch((error) => {
         console.error(`Ошибка при запросе фида: ${error.message}`);

@@ -14,12 +14,13 @@ export const addFeed = (watchedState, data, urlRss) => {
 };
 
 // Функция добавления поста
-export const addPost = (watchedState, feedId, title, link) => {
+export const addPost = (watchedState, feedId, title, link, description) => {
   const post = {
     id: uniqueId('post_'),
     feedId, // Связываем пост с определённым фидом
+    description,
     title,
-    link, // Сохраняем ссылку на пост
+    link, // ссылка на пост
   };
   watchedState.posts.push(post);
 };
@@ -40,7 +41,13 @@ export const fetchAndParseFeed = (watchedState, url) => {
 
         // Добавляем посты, связывая их с последним добавленным фидом
         return Promise.all(
-          data.items.map((item) => addPost(watchedState, lastFeedId, item.title, item.link)),
+          data.items.map((item) => addPost(
+            watchedState,
+            lastFeedId,
+            item.title,
+            item.link,
+            item.description,
+          )),
         );
       } catch (parseError) {
         watchedState.submitForm.error = `Ошибка парсинга данных: ${parseError.message}`;

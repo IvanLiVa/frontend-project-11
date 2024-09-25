@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import onChange from 'on-change';
-import render from './View.js';
+import render from './view/View.js';
 import i18n from './i18n.js';
 import fetchAndParseFeed from './rssService.js';
 import startUpdatingPosts from './startUpdatingPosts.js';
@@ -13,7 +13,7 @@ export default function app() {
       error: '',
       success: '',
     },
-    validationInputs: [],
+    readPosts: [],
   };
 
   function createFormSchema() {
@@ -23,7 +23,7 @@ export default function app() {
         .trim()
         .url(i18n.t('errorURL'))
         .required()
-        .notOneOf(state.validationInputs, i18n.t('duplicateURL')),
+        .notOneOf(state.feed.map((feed) => feed.urlRss), i18n.t('duplicateURL')),
     });
   }
 
@@ -44,7 +44,6 @@ export default function app() {
     formSchema
       .validate({ inputValue }, { abortEarly: false })
       .then(() => {
-        watchedState.validationInputs.push(inputValue);
         watchedState.submitForm.error = '';
         watchedState.submitForm.success = i18n.t('success');
         return fetchAndParseFeed(watchedState, inputValue);

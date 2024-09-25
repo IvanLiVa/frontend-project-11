@@ -15,8 +15,10 @@ const parseRSS = (xmlString) => {
   Array.from(items).forEach((el) => {
     const title = el.getElementsByTagName('title')[0]?.textContent || 'Нет заголовка';
     const link = el.getElementsByTagName('link')[0]?.textContent || 'Нет ссылки';
+    const description = el.getElementsByTagName('description')[0]?.textContent
+      || 'Нет описания поста';
 
-    result.push({ title, link });
+    result.push({ title, link, description });
   });
 
   return {
