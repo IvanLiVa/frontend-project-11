@@ -1,11 +1,9 @@
-import i18n from 'i18next';
-
-export default function renderFeeds(state) {
+export default function renderFeeds(state, i18nextInstance) {
   const feedList = document.querySelector('.feeds');
-  feedList.innerHTML = ''; // Очистим перед отрисовкой
+  feedList.innerHTML = '';
   if (state.feed.length > 0) {
     const feedTitle = document.createElement('h2');
-    feedTitle.textContent = i18n.t('feedsTitle');
+    feedTitle.textContent = i18nextInstance.t('Feeds');
     feedList.appendChild(feedTitle);
 
     const ulFeed = document.createElement('ul');

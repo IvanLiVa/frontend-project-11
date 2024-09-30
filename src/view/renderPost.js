@@ -1,12 +1,10 @@
-import i18n from 'i18next';
-
-export default function renderPosts(state) {
+export default function renderPosts(state, i18nextInstance) {
   const postList = document.querySelector('.posts');
   postList.innerHTML = ''; // Очистим перед отрисовкой
 
   if (state.posts.length > 0) {
     const postTitle = document.createElement('h2');
-    postTitle.textContent = i18n.t('postsTitle');
+    postTitle.textContent = i18nextInstance.t('Posts');
     postList.appendChild(postTitle);
 
     const ulPost = document.createElement('ul');
@@ -25,13 +23,22 @@ export default function renderPosts(state) {
       button.setAttribute('type', 'button');
       button.setAttribute('data-bs-toggle', 'modal');
       button.setAttribute('data-bs-target', '#exampleModal');
-      button.textContent = i18n.t('Просмотр');
+      button.textContent = i18nextInstance.t('view');
+
       if (state.readPosts.includes(post.id)) {
-        postLink.classList.add('read'); // если есть  айди  прочтианно добавляем класс
+        postLink.classList.add('read');
       }
+
       liPost.appendChild(postLink);
       liPost.appendChild(button);
       ulPost.appendChild(liPost);
+
+      const markPostAsRead = () => {
+        if (!state.readPosts.includes(post.id)) {
+          state.readPosts.push(post.id);
+        }
+        renderPosts(state, i18nextInstance);
+      };
 
       button.addEventListener('click', () => {
         const modalTitle = document.querySelector('#exampleModalLabel');
@@ -42,10 +49,11 @@ export default function renderPosts(state) {
         viewButton.onclick = () => {
           window.open(post.link, '_blank');
         };
-        if (!state.readPosts.includes(post.id)) {
-          state.readPosts.push(post.id);
-        }
-        renderPosts(state);
+        markPostAsRead();
+      });
+
+      postLink.addEventListener('click', () => {
+        markPostAsRead();
       });
     });
 
