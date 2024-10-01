@@ -18,10 +18,10 @@ export default function renderPosts(state, i18nextInstance) {
       postLink.textContent = post.title;
 
       if (state.readPosts.includes(post.id)) {
-        postLink.classList.remove('postLink');
-        postLink.classList.add('fw-bold');
+        postLink.classList.remove('fw-bold');
+        postLink.classList.add('fw-normal');
       } else {
-        postLink.classList.add('postLink');
+        postLink.classList.add('fw-bold');
       }
 
       const button = document.createElement('button');
