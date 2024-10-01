@@ -1,5 +1,3 @@
-import { DOMParser } from 'xmldom';
-
 const parseRSS = (xml) => {
   try {
     const parser = new DOMParser();
