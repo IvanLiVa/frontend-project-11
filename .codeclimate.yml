@@ -1,9 +1,3 @@
 version: "2"
-engines:
-  eslint:
-    enabled: true
-    config:
-      max_lines: 150  
-exclude:
-  - tests-examples/
-  - tests/                
+exclude_paths:
+  - tests-examples/                
