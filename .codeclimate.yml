@@ -1,3 +1,11 @@
-version: "2"
+version: '2'
+engines:
+  complexity:
+    enabled: true
+    config:
+      method-lines:
+        enabled: true
+        config:
+          threshold: 60
 exclude_paths:
-  - tests-examples/                
+  - tests-examples/
