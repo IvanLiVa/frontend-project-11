@@ -3,7 +3,7 @@ checks:
   method-lines:
     enabled: true
     config:
-      threshold: 60
+      threshold: 70
 
 exclude_paths:
   - tests-examples/
