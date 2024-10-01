@@ -1,0 +1,9 @@
+version: "2"
+engines:
+  eslint:
+    enabled: true
+    config:
+      max_lines: 150  
+exclude:
+  - demo-todo-app.spec.js  
+  - tests/                
