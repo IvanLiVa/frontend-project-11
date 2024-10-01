@@ -1,6 +1,6 @@
 export default function renderPosts(state, i18nextInstance) {
   const postList = document.querySelector('.posts');
-  postList.innerHTML = ''; // Очистим перед отрисовкой
+  postList.innerHTML = '';
 
   if (state.posts.length > 0) {
     const postTitle = document.createElement('h2');
@@ -15,8 +15,14 @@ export default function renderPosts(state, i18nextInstance) {
       const postLink = document.createElement('a');
       postLink.setAttribute('href', post.link);
       postLink.setAttribute('target', '_blank');
-      postLink.classList.add('postLink');
       postLink.textContent = post.title;
+
+      if (state.readPosts.includes(post.id)) {
+        postLink.classList.remove('postLink');
+        postLink.classList.add('fw-bold');
+      } else {
+        postLink.classList.add('postLink');
+      }
 
       const button = document.createElement('button');
       button.classList.add('buttonPost');
@@ -24,10 +30,6 @@ export default function renderPosts(state, i18nextInstance) {
       button.setAttribute('data-bs-toggle', 'modal');
       button.setAttribute('data-bs-target', '#exampleModal');
       button.textContent = i18nextInstance.t('view');
-
-      if (state.readPosts.includes(post.id)) {
-        postLink.classList.add('fw-bold');
-      }
 
       liPost.appendChild(postLink);
       liPost.appendChild(button);

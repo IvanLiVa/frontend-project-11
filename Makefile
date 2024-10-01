@@ -12,3 +12,6 @@ test:
 
 lint:
 	npx eslint .
+
+fixLint:
+	npx eslint . --fix
