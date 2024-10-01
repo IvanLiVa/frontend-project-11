@@ -1,11 +1,9 @@
 version: '2'
-engines:
-  complexity:
+checks:
+  method-lines:
     enabled: true
     config:
-      method-lines:
-        enabled: true
-        config:
-          threshold: 60
+      threshold: 60
+
 exclude_paths:
   - tests-examples/
