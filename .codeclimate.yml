@@ -4,6 +4,3 @@ checks:
     enabled: true
     config:
       threshold: 70
-
-exclude_paths:
-  - tests-examples/

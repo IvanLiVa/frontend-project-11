@@ -17,6 +17,7 @@ export default function renderPosts(state, i18nextInstance) {
       postLink.setAttribute('target', '_blank');
       postLink.textContent = post.title;
 
+      // Убираем fw-bold и добавляем fw-normal для прочитанных постов
       if (state.readPosts.includes(post.id)) {
         postLink.classList.remove('fw-bold');
         postLink.classList.add('fw-normal');
@@ -48,8 +49,12 @@ export default function renderPosts(state, i18nextInstance) {
         modalTitle.textContent = post.title;
         modalBody.textContent = post.description || 'Нет описания';
         const viewButton = document.querySelector('.modal-footer .btn-primary');
+
         viewButton.onclick = () => {
-          window.open(post.link, '_blank');
+          const link = document.createElement('a');
+          link.href = post.link;
+          link.target = '_blank';
+          link.click();
         };
         markPostAsRead();
       });

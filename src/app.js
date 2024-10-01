@@ -68,7 +68,6 @@ export default function app() {
           })
           .catch((error) => {
             const errorMessageKey = getMessageError(error);
-            console.log('Error:', errorMessageKey);
             watchedState.submitForm.error = i18nextInstance.t(errorMessageKey);
           });
       };
