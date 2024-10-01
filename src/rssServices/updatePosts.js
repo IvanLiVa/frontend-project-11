@@ -8,9 +8,9 @@ const updatePosts = (watchedState) => {
     .get(addProxy(feed.urlRss))
     .then((response) => {
       const { posts } = parseRss(response.data.contents);
-      const postState = watchedState.posts; // посты из  стейта
+      const postState = watchedState.posts; 
       const postsWithCurrentId = postState.filter(
-        (post) => post.feedId === feed.id, // посты из стейта    равные нашему айди
+        (post) => post.feedId === feed.id, 
       );
       const postLink = postsWithCurrentId.map((post) => post.link);
       const newPost = posts.filter((post) => !postLink.includes(post.link));
