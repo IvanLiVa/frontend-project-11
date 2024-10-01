@@ -5,5 +5,5 @@ engines:
     config:
       max_lines: 150  
 exclude:
-  - demo-todo-app.spec.js  
+  - tests-examples/
   - tests/                
