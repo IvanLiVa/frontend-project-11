@@ -8,9 +8,9 @@ const updatePosts = (watchedState) => {
     .get(addProxy(feed.urlRss))
     .then((response) => {
       const { posts } = parseRss(response.data.contents);
-      const postState = watchedState.posts; 
+      const postState = watchedState.posts;
       const postsWithCurrentId = postState.filter(
-        (post) => post.feedId === feed.id, 
+        (post) => post.feedId === feed.id,
       );
       const postLink = postsWithCurrentId.map((post) => post.link);
       const newPost = posts.filter((post) => !postLink.includes(post.link));

@@ -26,7 +26,7 @@ export default function renderPosts(state, i18nextInstance) {
       button.textContent = i18nextInstance.t('view');
 
       if (state.readPosts.includes(post.id)) {
-        postLink.classList.add('read');
+        postLink.classList.add('fw-bold');
       }
 
       liPost.appendChild(postLink);
