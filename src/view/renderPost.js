@@ -17,7 +17,6 @@ export default function renderPosts(state, i18nextInstance) {
       postLink.setAttribute('target', '_blank');
       postLink.textContent = post.title;
 
-      // Убираем fw-bold и добавляем fw-normal для прочитанных постов
       if (state.readPosts.includes(post.id)) {
         postLink.classList.remove('fw-bold');
         postLink.classList.add('fw-normal');

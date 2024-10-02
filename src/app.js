@@ -50,8 +50,8 @@ export default function app() {
       resources,
     })
     .then(() => {
-      const watchedState = onChange(state, () => {
-        render(watchedState, i18nextInstance);
+      const watchedState = onChange(state, (path) => {
+        render(watchedState, i18nextInstance)(path);
       });
 
       const handleFormSubmit = (inputValue) => {
