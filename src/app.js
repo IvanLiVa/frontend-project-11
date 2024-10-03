@@ -58,6 +58,7 @@ export default function app() {
         const formSchema = createFormSchema();
         formSchema
           .validate({ inputValue }, { abortEarly: false })
+
           .then(() => {
             watchedState.submitForm.error = '';
             return fetchAndParseFeed(watchedState, inputValue);
@@ -79,6 +80,42 @@ export default function app() {
         const inputValue = inputField.value.trim();
         handleFormSubmit(inputValue);
         inputField.value = '';
+      });
+
+      const markPostAsRead = (postId) => {
+        if (!state.readPosts.includes(postId)) {
+          console.log('включили в постайди');
+          watchedState.readPosts.push(postId);
+        }
+      };
+
+      const ulPost = document.querySelector('.posts');
+      ulPost.addEventListener('click', (event) => {
+        const postElement = event.target.closest('.liPost');
+        if (postElement) {
+          const postId = postElement.getAttribute('data-id');
+          const post = state.posts.find((p) => p.id === postId);
+          if (event.target.tagName === 'BUTTON') {
+            const modalTitle = document.querySelector('#exampleModalLabel');
+            const modalBody = document.querySelector('.modal-body');
+            modalTitle.textContent = post.title;
+            modalBody.textContent = post.description || 'Нет описания';
+
+            const viewButton = document.querySelector(
+              '.modal-footer .btn-primary',
+            );
+            viewButton.onclick = () => {
+              const link = document.createElement('a');
+              link.href = post.link;
+              link.target = '_blank';
+              link.click();
+            };
+
+            markPostAsRead(postId);
+          } else if (event.target.tagName === 'A') {
+            markPostAsRead(postId);
+          }
+        }
       });
     });
 }

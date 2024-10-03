@@ -10,6 +10,7 @@ export default function renderPosts(state, i18nextInstance) {
     const ulPost = document.createElement('ul');
     state.posts.forEach((post) => {
       const liPost = document.createElement('li');
+      liPost.setAttribute('data-id', post.id);
       liPost.classList.add('liPost');
 
       const postLink = document.createElement('a');
@@ -19,9 +20,10 @@ export default function renderPosts(state, i18nextInstance) {
 
       if (state.readPosts.includes(post.id)) {
         postLink.classList.remove('fw-bold');
-        postLink.classList.add('fw-normal');
+        postLink.classList.add('fw-normal', 'text-muted');
       } else {
         postLink.classList.add('fw-bold');
+        postLink.classList.remove('fw-normal', 'text-muted');
       }
 
       const button = document.createElement('button');
@@ -34,33 +36,6 @@ export default function renderPosts(state, i18nextInstance) {
       liPost.appendChild(postLink);
       liPost.appendChild(button);
       ulPost.appendChild(liPost);
-
-      const markPostAsRead = () => {
-        if (!state.readPosts.includes(post.id)) {
-          state.readPosts.push(post.id);
-        }
-        renderPosts(state, i18nextInstance);
-      };
-
-      button.addEventListener('click', () => {
-        const modalTitle = document.querySelector('#exampleModalLabel');
-        const modalBody = document.querySelector('.modal-body');
-        modalTitle.textContent = post.title;
-        modalBody.textContent = post.description || 'Нет описания';
-        const viewButton = document.querySelector('.modal-footer .btn-primary');
-
-        viewButton.onclick = () => {
-          const link = document.createElement('a');
-          link.href = post.link;
-          link.target = '_blank';
-          link.click();
-        };
-        markPostAsRead();
-      });
-
-      postLink.addEventListener('click', () => {
-        markPostAsRead();
-      });
     });
 
     postList.appendChild(ulPost);
