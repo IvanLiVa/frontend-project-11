@@ -34,16 +34,13 @@ const fetchAndParseFeed = (watchedState, urlRss) => fetchData(urlRss)
     const parsedData = parseRss(data);
     addFeed(watchedState, parsedData, urlRss);
     const lastFeedId = watchedState.feed[watchedState.feed.length - 1].id;
-
-    return Promise.all(
-      parsedData.posts.map((item) => addPost(
-        watchedState,
-        lastFeedId,
-        item.title,
-        item.link,
-        item.description,
-      )),
-    );
+    parsedData.posts.forEach((item) => addPost(
+      watchedState,
+      lastFeedId,
+      item.title,
+      item.link,
+      item.description,
+    ));
   })
   .catch((error) => Promise.reject(error));
 

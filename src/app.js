@@ -62,8 +62,8 @@ export default function app() {
             watchedState.submitForm.error = '';
             return fetchAndParseFeed(watchedState, inputValue);
           })
-          .then(() => updatePosts(watchedState))
           .then(() => {
+            updatePosts(watchedState);
             watchedState.submitForm.success = i18nextInstance.t('success');
           })
           .catch((error) => {
