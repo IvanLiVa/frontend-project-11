@@ -1,9 +1,9 @@
-export default function renderFormState(state, i18nextInstance, elements) {
-  const copyElements = { ...elements };
+/* eslint-disable no-param-reassign */
 
+export default function renderFormState(state, i18nextInstance, elements) {
   const {
     inputField, feedbackElement, submitButton, form,
-  } = copyElements;
+  } = elements;
 
   switch (state.formState) {
     case 'invalid':
