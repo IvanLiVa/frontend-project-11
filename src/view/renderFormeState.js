@@ -46,7 +46,7 @@ export default function renderFormState(state, i18nextInstance, elements) {
   const renderState = (status) => {
     switch (status) {
       case 'invalid':
-        renderInvalid({ ...elements, i18nextInstance });
+        renderInvalid({ ...elements });
         break;
       case 'sending':
         renderSending({ ...elements, i18nextInstance });

@@ -72,7 +72,6 @@ export default function app() {
         const formSchema = createFormSchema();
         formSchema
           .validate({ inputValue }, { abortEarly: false })
-
           .then(() => {
             watchedState.submitForm.error = '';
             watchedState.formState = 'sending';
