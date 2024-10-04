@@ -1,7 +1,9 @@
 export default function renderFormState(state, i18nextInstance, elements) {
   const copyElements = { ...elements };
 
-  const { inputField, feedbackElement, submitButton, form } = copyElements;
+  const {
+    inputField, feedbackElement, submitButton, form,
+  } = copyElements;
 
   switch (state.formState) {
     case 'invalid':
