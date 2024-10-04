@@ -23,7 +23,9 @@ function renderSending(
 }
 
 function renderAdded(
-  { inputField, feedbackElement, submitButton, form },
+  {
+    inputField, feedbackElement, submitButton, form,
+  },
   i18nextInstance,
 ) {
   submitButton.disabled = false;
