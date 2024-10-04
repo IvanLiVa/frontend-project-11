@@ -1,9 +1,9 @@
-function renderInvalid(
+const renderInvalid = (
   inputField,
   feedbackElement,
   submitButton,
   i18nextInstance,
-) {
+) => {
   submitButton.disabled = false;
   inputField.classList.add('is-invalid');
   feedbackElement.classList.remove('text-success', 'text-warning');
@@ -11,28 +11,28 @@ function renderInvalid(
   feedbackElement.textContent = i18nextInstance.t('invalid');
   inputField.value = '';
   inputField.focus();
-}
+};
 
-function renderSending(
+const renderSending = (
   inputField,
   feedbackElement,
   submitButton,
   i18nextInstance,
-) {
+) => {
   submitButton.disabled = true;
   inputField.classList.remove('is-invalid');
   feedbackElement.classList.remove('text-danger', 'text-success');
   feedbackElement.classList.add('text-warning');
   feedbackElement.textContent = i18nextInstance.t('sending');
-}
+};
 
-function renderAdded(
+const renderAdded = (
   inputField,
   feedbackElement,
   submitButton,
   form,
   i18nextInstance,
-) {
+) => {
   submitButton.disabled = false;
   inputField.classList.remove('is-invalid');
   feedbackElement.classList.remove('text-danger', 'text-warning');
@@ -40,7 +40,7 @@ function renderAdded(
   feedbackElement.textContent = i18nextInstance.t('success');
   form.reset();
   inputField.focus();
-}
+};
 
 export default function renderFormState(state, i18nextInstance, elements) {
   const {
