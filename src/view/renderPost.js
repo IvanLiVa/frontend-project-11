@@ -16,7 +16,7 @@ export default function renderPosts(state, i18nextInstance, elements) {
       const postLink = document.createElement('a');
       postLink.setAttribute('href', post.link);
       postLink.setAttribute('target', '_blank');
-      postLink.textContent = post.title;
+      postLink.textContent = i18nextInstance.t(post.title);
 
       if (state.readPosts.includes(post.id)) {
         postLink.classList.remove('fw-bold');

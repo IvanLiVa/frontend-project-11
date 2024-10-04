@@ -110,8 +110,8 @@ export default function app() {
           if (event.target.tagName === 'BUTTON') {
             const modalTitle = document.querySelector('#exampleModalLabel');
             const modalBody = document.querySelector('.modal-body');
-            modalTitle.textContent = i18next.t(post.title);
-            modalBody.textContent = i18next.t(post.description);
+            modalTitle.textContent = post.title;
+            modalBody.textContent = post.description;
 
             const viewButton = document.querySelector(
               '.modal-footer .btn-primary',
