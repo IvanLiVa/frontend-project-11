@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 export default function renderFeeds(state, i18nextInstance, elements) {
   const { feedList } = elements;
   feedList.innerHTML = '';

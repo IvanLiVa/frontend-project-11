@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 export default function renderPosts(state, i18nextInstance, elements) {
   const { postList } = elements;
   postList.innerHTML = '';

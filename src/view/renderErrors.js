@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 export default function renderErrors(state, i18nextInstance, elements) {
   if (state.submitForm.error === '') {
     return;
