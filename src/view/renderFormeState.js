@@ -1,9 +1,7 @@
-const renderInvalid = ({
-  inputField,
-  feedbackElement,
-  submitButton,
+function renderInvalid(
+  { inputField, feedbackElement, submitButton },
   i18nextInstance,
-}) => {
+) {
   submitButton.disabled = false;
   inputField.classList.add('is-invalid');
   feedbackElement.classList.remove('text-success', 'text-warning');
@@ -11,28 +9,23 @@ const renderInvalid = ({
   feedbackElement.textContent = i18nextInstance.t('invalid');
   inputField.value = '';
   inputField.focus();
-};
+}
 
-const renderSending = ({
-  inputField,
-  feedbackElement,
-  submitButton,
+function renderSending(
+  { inputField, feedbackElement, submitButton },
   i18nextInstance,
-}) => {
+) {
   submitButton.disabled = true;
   inputField.classList.remove('is-invalid');
   feedbackElement.classList.remove('text-danger', 'text-success');
   feedbackElement.classList.add('text-warning');
   feedbackElement.textContent = i18nextInstance.t('sending');
-};
+}
 
-const renderAdded = ({
-  inputField,
-  feedbackElement,
-  submitButton,
-  form,
+function renderAdded(
+  { inputField, feedbackElement, submitButton, form },
   i18nextInstance,
-}) => {
+) {
   submitButton.disabled = false;
   inputField.classList.remove('is-invalid');
   feedbackElement.classList.remove('text-danger', 'text-warning');
@@ -40,19 +33,19 @@ const renderAdded = ({
   feedbackElement.textContent = i18nextInstance.t('success');
   form.reset();
   inputField.focus();
-};
+}
 
 export default function renderFormState(state, i18nextInstance, elements) {
   const renderState = (status) => {
     switch (status) {
       case 'invalid':
-        renderInvalid({ ...elements });
+        renderInvalid(elements, i18nextInstance);
         break;
       case 'sending':
-        renderSending({ ...elements, i18nextInstance });
+        renderSending(elements, i18nextInstance);
         break;
       case 'added':
-        renderAdded({ ...elements, i18nextInstance });
+        renderAdded(elements, i18nextInstance);
         break;
       default:
         break;
