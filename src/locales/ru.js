@@ -8,6 +8,7 @@ export default {
     empty: 'Не должно быть пустым',
     parsingError: 'Ресурс не содержит валидный RSS',
     success: 'RSS успешно загружен',
+    sending: 'RSS загуржается',
     exampleLink: 'Пример: https://lorem-rss.hexlet.app/feed',
     Posts: 'Посты',
     Feeds: 'Фиды',

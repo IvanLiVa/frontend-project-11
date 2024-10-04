@@ -19,6 +19,7 @@ export default function app() {
   };
 
   const state = {
+    formState: 'filling',
     feed: [],
     posts: [],
     submitForm: {
@@ -61,15 +62,17 @@ export default function app() {
 
           .then(() => {
             watchedState.submitForm.error = '';
+            watchedState.formState = 'sending';
             return fetchAndParseFeed(watchedState, inputValue);
           })
           .then(() => {
             updatePosts(watchedState);
-            watchedState.submitForm.success = i18nextInstance.t('success');
+            watchedState.formState = 'added';
           })
           .catch((error) => {
+            watchedState.formState = 'invalid';
             const errorMessageKey = getMessageError(error);
-            watchedState.submitForm.error = i18nextInstance.t(errorMessageKey);
+            watchedState.submitForm.error = errorMessageKey;
           });
       };
 
@@ -84,7 +87,6 @@ export default function app() {
 
       const markPostAsRead = (postId) => {
         if (!state.readPosts.includes(postId)) {
-          console.log('включили в постайди');
           watchedState.readPosts.push(postId);
         }
       };
