@@ -9,6 +9,8 @@ function renderInvalid(
   feedbackElement.classList.remove('text-success', 'text-warning');
   feedbackElement.classList.add('text-danger');
   feedbackElement.textContent = i18nextInstance.t('invalid');
+  inputField.value = '';
+  inputField.focus();
 }
 
 function renderSending(
@@ -40,11 +42,10 @@ function renderAdded(
   inputField.focus();
 }
 
-export default function renderFormState(state, i18nextInstance) {
-  const feedbackElement = document.querySelector('.feedback');
-  const inputField = document.querySelector('#url-input');
-  const form = document.querySelector('.rss-form');
-  const submitButton = form.querySelector('[type="submit"]');
+export default function renderFormState(state, i18nextInstance, elements) {
+  const {
+    feedbackElement, inputField, submitButton, form,
+  } = elements;
 
   const renderState = (status) => {
     switch (status) {

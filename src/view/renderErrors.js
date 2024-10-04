@@ -1,10 +1,10 @@
-export default function renderErrors(state, i18nextInstance) {
-  const feedbackElement = document.querySelector('.feedback');
-
+export default function renderErrors(state, i18nextInstance, elements) {
   if (state.submitForm.error === '') {
     return;
   }
 
-  feedbackElement.classList.add('text-danger');
-  feedbackElement.textContent = i18nextInstance.t(`${state.submitForm.error}`);
+  elements.feedbackElement.classList.add('text-danger');
+  elements.feedbackElement.textContent = i18nextInstance.t(
+    `${state.submitForm.error}`,
+  );
 }

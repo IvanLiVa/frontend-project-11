@@ -1,5 +1,5 @@
-export default function renderPosts(state, i18nextInstance) {
-  const postList = document.querySelector('.posts');
+export default function renderPosts(state, i18nextInstance, elements) {
+  const { postList } = elements;
   postList.innerHTML = '';
 
   if (state.posts.length > 0) {

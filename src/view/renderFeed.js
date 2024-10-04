@@ -1,5 +1,5 @@
-export default function renderFeeds(state, i18nextInstance) {
-  const feedList = document.querySelector('.feeds');
+export default function renderFeeds(state, i18nextInstance, elements) {
+  const { feedList } = elements;
   feedList.innerHTML = '';
   if (state.feed.length > 0) {
     const feedTitle = document.createElement('h2');

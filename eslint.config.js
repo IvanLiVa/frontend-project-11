@@ -45,6 +45,7 @@ export default [
         {
           allow: ['__filename', '__dirname'],
         },
+
       ],
       'import/extensions': [
         'error',

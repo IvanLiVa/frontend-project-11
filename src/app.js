@@ -43,6 +43,19 @@ export default function app() {
     });
   }
 
+  const elements = {
+    feedbackElement: document.querySelector('.feedback'),
+    inputField: document.querySelector('#url-input'),
+    form: document.querySelector('.rss-form'),
+    submitButton: document.querySelector('.rss-form [type="submit"]'),
+    ulPost: document.querySelector('.posts'),
+    modalTitle: document.querySelector('#exampleModalLabel'),
+    modalBody: document.querySelector('.modal-body'),
+    viewButton: document.querySelector('.modal-footer .btn-primary'),
+    postList: document.querySelector('.posts'),
+    feedList: document.querySelector('.feeds'),
+  };
+
   const i18nextInstance = i18next.createInstance();
   i18nextInstance
     .init({
@@ -52,7 +65,7 @@ export default function app() {
     })
     .then(() => {
       const watchedState = onChange(state, (path) => {
-        render(watchedState, i18nextInstance)(path);
+        render(watchedState, i18nextInstance, elements)(path);
       });
 
       const handleFormSubmit = (inputValue) => {
@@ -76,13 +89,11 @@ export default function app() {
           });
       };
 
-      const form = document.querySelector('.rss-form');
-      form.addEventListener('submit', (event) => {
+      elements.form.addEventListener('submit', (event) => {
         event.preventDefault();
         const inputField = document.querySelector('#url-input');
         const inputValue = inputField.value.trim();
         handleFormSubmit(inputValue);
-        inputField.value = '';
       });
 
       const markPostAsRead = (postId) => {
@@ -91,8 +102,7 @@ export default function app() {
         }
       };
 
-      const ulPost = document.querySelector('.posts');
-      ulPost.addEventListener('click', (event) => {
+      elements.ulPost.addEventListener('click', (event) => {
         const postElement = event.target.closest('.liPost');
         if (postElement) {
           const postId = postElement.getAttribute('data-id');
@@ -100,8 +110,8 @@ export default function app() {
           if (event.target.tagName === 'BUTTON') {
             const modalTitle = document.querySelector('#exampleModalLabel');
             const modalBody = document.querySelector('.modal-body');
-            modalTitle.textContent = post.title;
-            modalBody.textContent = post.description || 'Нет описания';
+            modalTitle.textContent = i18next.t(post.title);
+            modalBody.textContent = i18next.t(post.description);
 
             const viewButton = document.querySelector(
               '.modal-footer .btn-primary',
