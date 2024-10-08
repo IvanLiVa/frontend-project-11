@@ -7,17 +7,17 @@ import fetchAndParseFeed from './rssServices/rssService.js';
 import resources from './locales/index.js';
 import updatePosts from './rssServices/updatePosts.js';
 
-export default function app() {
-  const getMessageError = (error) => {
-    if (error.isParsingError) {
-      return 'parsingError';
-    }
-    if (axios.isAxiosError(error)) {
-      return 'networkError';
-    }
-    return error.message.key ?? 'unknown';
-  };
+const getMessageError = (error) => {
+  if (error.isParsingError) {
+    return 'parsingError';
+  }
+  if (axios.isAxiosError(error)) {
+    return 'networkError';
+  }
+  return error.message.key ?? 'unknown';
+};
 
+export default function app() {
   const state = {
     formState: 'filling',
     feed: [],
@@ -27,6 +27,19 @@ export default function app() {
       success: '',
     },
     readPosts: [],
+  };
+
+  const elements = {
+    feedbackElement: document.querySelector('.feedback'),
+    inputField: document.querySelector('#url-input'),
+    form: document.querySelector('.rss-form'),
+    submitButton: document.querySelector('.rss-form [type="submit"]'),
+    ulPost: document.querySelector('.posts'),
+    modalTitle: document.querySelector('#exampleModalLabel'),
+    modalBody: document.querySelector('.modal-body'),
+    viewButton: document.querySelector('.modal-footer .btn-primary'),
+    postList: document.querySelector('.posts'),
+    feedList: document.querySelector('.feeds'),
   };
 
   function createFormSchema() {
@@ -43,19 +56,6 @@ export default function app() {
     });
   }
 
-  const elements = {
-    feedbackElement: document.querySelector('.feedback'),
-    inputField: document.querySelector('#url-input'),
-    form: document.querySelector('.rss-form'),
-    submitButton: document.querySelector('.rss-form [type="submit"]'),
-    ulPost: document.querySelector('.posts'),
-    modalTitle: document.querySelector('#exampleModalLabel'),
-    modalBody: document.querySelector('.modal-body'),
-    viewButton: document.querySelector('.modal-footer .btn-primary'),
-    postList: document.querySelector('.posts'),
-    feedList: document.querySelector('.feeds'),
-  };
-
   const i18nextInstance = i18next.createInstance();
   i18nextInstance
     .init({
@@ -68,6 +68,8 @@ export default function app() {
         render(watchedState, i18nextInstance, elements)(path);
       });
 
+      updatePosts(watchedState);
+
       const handleFormSubmit = (inputValue) => {
         const formSchema = createFormSchema();
         formSchema
@@ -78,7 +80,6 @@ export default function app() {
             return fetchAndParseFeed(watchedState, inputValue);
           })
           .then(() => {
-            updatePosts(watchedState);
             watchedState.formState = 'added';
           })
           .catch((error) => {

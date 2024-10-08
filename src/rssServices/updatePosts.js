@@ -15,7 +15,6 @@ const updatePosts = (watchedState) => {
       const postLink = postsWithCurrentId.map((post) => post.link);
       const newPost = posts.filter((post) => !postLink.includes(post.link));
       newPost.forEach((post) => {
-        console.log('добавлен новый пост');
         addPost(
           watchedState,
           feed.id,
