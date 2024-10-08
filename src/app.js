@@ -27,6 +27,7 @@ export default function app() {
       success: '',
     },
     readPosts: [],
+    modalPostId: null,
   };
 
   const elements = {
@@ -106,23 +107,8 @@ export default function app() {
         const postElement = event.target.closest('.liPost');
         if (postElement) {
           const postId = postElement.getAttribute('data-id');
-          const post = state.posts.find((p) => p.id === postId);
           if (event.target.tagName === 'BUTTON') {
-            const modalTitle = document.querySelector('#exampleModalLabel');
-            const modalBody = document.querySelector('.modal-body');
-            modalTitle.textContent = post.title;
-            modalBody.textContent = post.description;
-
-            const viewButton = document.querySelector(
-              '.modal-footer .btn-primary',
-            );
-            viewButton.onclick = () => {
-              const link = document.createElement('a');
-              link.href = post.link;
-              link.target = '_blank';
-              link.click();
-            };
-
+            watchedState.modalPostId = postId;
             markPostAsRead(postId);
           } else if (event.target.tagName === 'A') {
             markPostAsRead(postId);
